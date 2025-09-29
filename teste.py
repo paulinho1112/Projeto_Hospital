@@ -23,7 +23,7 @@ cidades[:] = [c for c in cidades if c["estado"] != "SP"]; salvar_cidades()
 def excluir_simples():
     print("1. Cidades")
     print("2. Pacientes") 
-    print("3. Médicosss")
+    print("3. Médicos")
     
     opcao = input("Escolha a tabela: ")
     codigo = int(input("Código para excluir: "))
