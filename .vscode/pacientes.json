@@ -1,0 +1,12 @@
+[
+  {
+    "codigo": 1,
+    "nome": "João Silva",
+    "data_nascimento": "1990-01-01",
+    "endereco": "Rua X, 789",
+    "telefone": "3333-3333",
+    "codigo_cidade": 1,
+    "peso": 70.5,
+    "altura": 1.75
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "codigo": 2,
+    "nome": "Dra. Maria",
+    "endereco": "Rua B, 456",
+    "telefone": "2222-2222",
+    "codigo_cidade": 2,
+    "codigo_especialidade": 2
+  }
+]
