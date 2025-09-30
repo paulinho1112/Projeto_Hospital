@@ -1,12 +1,17 @@
 import json
+from arvore_simples import ArvoreBinaria
 
 pacientes = []
+indice = ArvoreBinaria()
 
 def carregar_pacientes():
-    global pacientes
+    global pacientes, indice
     try:
         with open('pacientes.json', 'r', encoding='utf-8') as f:
             pacientes = json.load(f)
+            # Reconstruir índice
+            for paciente in pacientes:
+                indice.inserir(paciente["codigo"], paciente)
     except FileNotFoundError:
         pacientes = []
 
@@ -18,11 +23,10 @@ def salvar_pacientes():
 carregar_pacientes()
 
 def adicionar_paciente(codigo, nome, data_nascimento, endereco, telefone, codigo_cidade, peso, altura):
-
-    for paciente in pacientes:
-        if paciente["codigo"] == codigo:
-            print("código de paciente já existe!")
-            return False
+    # Verificar se código já existe usando índice
+    if indice.buscar(codigo) is not None:
+        print("código de paciente já existe!")
+        return False
     
     novo_paciente = {
         "codigo": codigo,
@@ -36,42 +40,45 @@ def adicionar_paciente(codigo, nome, data_nascimento, endereco, telefone, codigo
     }
 
     pacientes.append(novo_paciente)
+    indice.inserir(codigo, novo_paciente)  # Adicionar ao índice
     salvar_pacientes()  # Salvar após adicionar
     return True
 
 def buscar_paciente_por_codigo(codigo):
-    for paciente in pacientes:
-        if paciente["codigo"] == codigo:
-            return paciente
-    return None
+    """Busca usando índice (mais rápido)"""
+    return indice.buscar(codigo)
 
 
 def listar_pacientes():
-
-    return pacientes
+    """Lista usando índice (em ordem de código)"""
+    return indice.listar_todos()
 
 
 def atualizar_paciente(codigo, nome, data_nascimento, endereco, telefone, codigo_cidade, peso, altura):
-    for paciente in pacientes:
-        if paciente["codigo"] == codigo:
-            paciente["nome"] = nome
-            paciente["data_nascimento"] = data_nascimento
-            paciente["endereco"] = endereco
-            paciente["telefone"] = telefone
-            paciente["codigo_cidade"] = codigo_cidade
-            paciente["peso"] = peso
-            paciente["altura"] = altura
-            salvar_pacientes()  # Salvar após atualizar
-            return True
-
+    # Buscar usando índice
+    paciente = indice.buscar(codigo)
+    if paciente is not None:
+        paciente["nome"] = nome
+        paciente["data_nascimento"] = data_nascimento
+        paciente["endereco"] = endereco
+        paciente["telefone"] = telefone
+        paciente["codigo_cidade"] = codigo_cidade
+        paciente["peso"] = peso
+        paciente["altura"] = altura
+        # Atualizar no índice também
+        indice.inserir(codigo, paciente)
+        salvar_pacientes()  # Salvar após atualizar
+        return True
     return False
 
 
 
 def remover_paciente(codigo):
+    # Remover da lista
     for i, paciente in enumerate(pacientes):
         if paciente["codigo"] == codigo:
             del pacientes[i]
+            indice.remover(codigo)  # Remover do índice
             salvar_pacientes()  # Salvar após remover
             return True
     return False
@@ -83,3 +90,20 @@ def buscar_pacientes_por_campo(campo, valor):
         if paciente.get(campo) == valor:
             resultado.append(paciente)
     return resultado
+
+# Funções extras usando o índice
+def listar_pacientes_ordenados():
+    """Lista pacientes em ordem de código (usando índice)"""
+    return indice.listar_todos()
+
+def buscar_paciente_por_posicao(posicao):
+    """Busca paciente por posição na lista ordenada"""
+    return indice.buscar_por_posicao(posicao)
+
+def contar_pacientes():
+    """Conta quantos pacientes existem"""
+    return indice.contar()
+
+def listar_codigos_pacientes():
+    """Lista apenas os códigos dos pacientes em ordem"""
+    return indice.listar_codigos()

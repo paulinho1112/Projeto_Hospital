@@ -1,0 +1,8 @@
+[
+  {
+    "codigo": 1,
+    "descricao": "Cardiologia",
+    "valor_consulta": 150.0,
+    "limite_diario": 10
+  }
+]

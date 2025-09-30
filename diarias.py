@@ -1,12 +1,17 @@
 import json
+from arvore_simples import ArvoreBinaria
 
 diarias = []
+indice = ArvoreBinaria()
 
 def carregar_diarias():
-    global diarias
+    global diarias, indice
     try:
         with open('diarias.json', 'r', encoding='utf-8') as f:
             diarias = json.load(f)
+            # Reconstruir índice
+            for diaria in diarias:
+                indice.inserir(diaria["codigo"], diaria)
     except FileNotFoundError:
         diarias = []
 
@@ -18,49 +23,51 @@ def salvar_diarias():
 carregar_diarias()
 
 def adicionar_diaria(codigo, codigo_especialidade, quantidade_consultas):
-    
-   for diaria in diarias:
-       if diaria["codigo"] == codigo:
-          print("Código de dia já existe!")
-          return False
+    # Verificar se código já existe usando índice
+    if indice.buscar(codigo) is not None:
+        print("Código de dia já existe!")
+        return False
 
-   nova_diaria = {
+    nova_diaria = {
         "codigo": codigo,
         "codigo_especialidade": codigo_especialidade,
         "quantidade_consultas": quantidade_consultas
     }
 
-   diarias.append(nova_diaria)
-   salvar_diarias()  # Salvar após adicionar
-   return True
+    diarias.append(nova_diaria)
+    indice.inserir(codigo, nova_diaria)  # Adicionar ao índice
+    salvar_diarias()  # Salvar após adicionar
+    return True
 
 
 def buscar_diaria_por_codigo(codigo):
-    for diaria in diarias:
-        if diaria["codigo"] == codigo:
-            return diaria
-    return None
+    """Busca usando índice (mais rápido)"""
+    return indice.buscar(codigo)
 
 def listar_diarias():
-
-    return diarias
+    """Lista usando índice (em ordem de código)"""
+    return indice.listar_todos()
 
 
 def atualizar_diaria(codigo, codigo_especialidade, quantidade_consultas):
-    for diaria in diarias:
-        if diaria["codigo"] == codigo:
-            diaria["codigo_especialidade"] = codigo_especialidade
-            diaria["quantidade_consultas"] = quantidade_consultas
-            salvar_diarias()  # Salvar após atualizar
-            return True
-
+    # Buscar usando índice
+    diaria = indice.buscar(codigo)
+    if diaria is not None:
+        diaria["codigo_especialidade"] = codigo_especialidade
+        diaria["quantidade_consultas"] = quantidade_consultas
+        # Atualizar no índice também
+        indice.inserir(codigo, diaria)
+        salvar_diarias()  # Salvar após atualizar
+        return True
     return False
 
 
 def remover_diaria(codigo):
+    # Remover da lista
     for i, diaria in enumerate(diarias):
         if diaria["codigo"] == codigo:
             del diarias[i]
+            indice.remover(codigo)  # Remover do índice
             salvar_diarias()  # Salvar após remover
             return True
     return False
@@ -73,3 +80,20 @@ def buscar_diarias_por_campo(campo, valor):
         if diaria.get(campo) == valor:
             resultado.append(diaria)
     return resultado
+
+# Funções extras usando o índice
+def listar_diarias_ordenadas():
+    """Lista diárias em ordem de código (usando índice)"""
+    return indice.listar_todos()
+
+def buscar_diaria_por_posicao(posicao):
+    """Busca diária por posição na lista ordenada"""
+    return indice.buscar_por_posicao(posicao)
+
+def contar_diarias():
+    """Conta quantas diárias existem"""
+    return indice.contar()
+
+def listar_codigos_diarias():
+    """Lista apenas os códigos das diárias em ordem"""
+    return indice.listar_codigos()
