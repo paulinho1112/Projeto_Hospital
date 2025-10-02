@@ -1,19 +1,20 @@
-# Sistema Hospitalar com Árvore Binária
+# Sistema Hospitalar - Projeto Simples e Funcional
 
-## Funcionalidades Implementadas
+## ✅ Funcionalidades Implementadas
 
-### ✅ Operações Básicas
+### Operações Básicas
 - **Inclusão** de novos registros nas tabelas
 - **Consulta** de registros das tabelas  
 - **Exclusão** de registros das tabelas
 - **Leitura exaustiva** das tabelas
 
-### 🌳 Estrutura de Dados
-- **Árvore Binária** implementada para indexação
-- Busca, inclusão e exclusão com complexidade O(log n)
+### Estrutura de Dados
+- **Árvore Binária** para indexação eficiente
+- Busca, inclusão e exclusão otimizadas
 - Listagem ordenada por código
+- Armazenamento em arquivos JSON
 
-### 📊 Módulos Disponíveis
+### Módulos Disponíveis
 - `medicos.py` - Gestão de médicos
 - `pacientes.py` - Gestão de pacientes
 - `consultas.py` - Gestão de consultas
@@ -22,7 +23,7 @@
 - `diarias.py` - Gestão de diárias
 - `cidades.py` - Gestão de cidades
 
-### 🚀 Como Usar
+### Como Usar
 ```python
 import medicos
 
@@ -34,7 +35,17 @@ medico = medicos.buscar_medico_por_codigo(1)
 
 # Listar todos os médicos (em ordem)
 todos = medicos.listar_medicos()
+
+# Remover médico
+medicos.remover_medico(1)
 ```
 
+### Características
+- ✅ Sistema simples e funcional
+- ✅ Árvore binária para performance
+- ✅ Armazenamento em JSON
+- ✅ Todas as operações CRUD implementadas
+- ✅ Código limpo e bem documentado
+
 ---
-*Implementado com árvore binária para performance otimizada*
+*Projeto desenvolvido com foco na simplicidade e funcionalidade*

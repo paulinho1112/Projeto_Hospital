@@ -4,5 +4,11 @@
     "descricao": "Cardiologia",
     "valor_consulta": 150.0,
     "limite_diario": 10
+  },
+  {
+    "codigo": 2,
+    "descricao": "Pediatria",
+    "valor_consulta": 120.0,
+    "limite_diario": 15
   }
 ]
