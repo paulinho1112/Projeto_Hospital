@@ -45,13 +45,18 @@ def adicionar_paciente(codigo, nome, data_nascimento, endereco, telefone, codigo
     return True
 
 def buscar_paciente_por_codigo(codigo):
-    """Busca usando índice (mais rápido)"""
     return indice.buscar(codigo)
 
 
 def listar_pacientes():
-    """Lista usando índice (em ordem de código)"""
-    return indice.listar_todos()
+    pacientes_ordenados = indice.listar_todos()
+
+    for paciente in pacientes_ordenados:
+        dados_cidade = buscar_dados_cidade(paciente['codigo_cidade'])
+        paciente['nome_cidade'] = dados_cidade['nome_cidade']
+        paciente['estado'] = dados_cidade['estado']
+        
+    return pacientes_ordenados
 
 
 def atualizar_paciente(codigo, nome, data_nascimento, endereco, telefone, codigo_cidade, peso, altura):
@@ -93,17 +98,45 @@ def buscar_pacientes_por_campo(campo, valor):
 
 # Funções extras usando o índice
 def listar_pacientes_ordenados():
-    """Lista pacientes em ordem de código (usando índice)"""
     return indice.listar_todos()
 
 def buscar_paciente_por_posicao(posicao):
-    """Busca paciente por posição na lista ordenada"""
     return indice.buscar_por_posicao(posicao)
 
 def contar_pacientes():
-    """Conta quantos pacientes existem"""
+
     return indice.contar()
 
-def listar_codigos_pacientes():
-    """Lista apenas os códigos dos pacientes em ordem"""
+def listar_codigos_pacientes():  
     return indice.listar_codigos()
+
+def buscar_dados_cidade(codigo_cidade):
+    import cidades
+
+    cidade = cidades.buscar_cidade_por_codigo(codigo_cidade)
+    if cidade:
+        return {
+            'nome_cidade': cidade['descricao'],
+            'estado': cidade['estado']
+        }
+    else:
+        return {
+            'nome_cidade': 'Cidade não encontrada',
+            'estado': 'N/A'
+        }
+
+
+def calcular_imc(peso, altura):
+    imc = peso / (altura)**2
+    return imc
+
+def classificar_imc(imc):
+    if imc < 18.5:
+        return "Abaixo do peso"
+    elif imc >= 18.5 and imc < 25:
+        return "Peso normal"
+    elif imc >= 25 and imc < 30:
+        return "Sobrepeso"
+    else:
+        return "Obesidade"
+
