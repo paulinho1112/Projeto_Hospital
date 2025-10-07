@@ -1,0 +1,155 @@
+eae6c8336d77675a5fe3562908b22998e3417c2a Paulinho paulinho1112@github.com Tue Oct 7 16:37:31 2025
+
+[1mdiff --git a/.vscode/README.md b/.vscode/README.md[m
+[1mindex 66445ad..d7063a6 100644[m
+Binary files a/.vscode/README.md and b/.vscode/README.md differ
+[1mdiff --git a/README.md b/README.md[m
+[1mdeleted file mode 100644[m
+[1mindex d7063a6..0000000[m
+Binary files a/README.md and /dev/null differ
+[1mdiff --git a/app.py b/app.py[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b9fa074[m
+[1m--- /dev/null[m
+[1m+++ b/app.py[m
+[36m@@ -0,0 +1,285 @@[m
+[32m+[m[32mfrom flask import Flask, render_template, request, redirect, url_for, flash, jsonify[m
+[32m+[m[32mimport json[m
+[32m+[m[32mimport os[m
+[32m+[m[32mfrom datetime import datetime[m
+[32m+[m
+[32m+[m[32m# Importar módulos do sistema[m
+[32m+[m[32mimport cidades[m
+[32m+[m[32mimport especialidades[m
+[32m+[m[32mimport medicos[m
+[32m+[m[32mimport pacientes[m
+[32m+[m[32mimport exames[m
+[32m+[m[32mimport consultas[m
+[32m+[m[32mimport diarias[m
+[32m+[m
+[32m+[m[32mapp = Flask(__name__)[m
+[32m+[m[32mapp.secret_key = 'sistema_hospitalar_2024'[m
+[32m+[m
+[32m+[m[32m# Função para limpar dados (opcional)[m
+[32m+[m[32mdef limpar_dados():[m
+[32m+[m[32m    """Limpa todos os dados para demonstração limpa"""[m
+[32m+[m[32m    arquivos = ['cidades.json', 'especialidades.json', 'medicos.json',[m[41m [m
+[32m+[m[32m                'pacientes.json', 'exames.json', 'consultas.json', 'diarias.json'][m
+[32m+[m[32m    for arquivo in arquivos:[m
+[32m+[m[32m        if os.path.exists(arquivo):[m
+[32m+[m[32m            os.remove(arquivo)[m
+[32m+[m
+[32m+[m[32m# Rota principal[m
+[32m+[m[32m@app.route('/')[m
+[32m+[m[32mdef index():[m
+[32m+[m[32m    return render_template('index.html')[m
+[32m+[m
+[32m+[m[32m# ===== ROTAS PARA CIDADES =====[m
+[32m+[m[32m@app.route('/cidades')[m
+[32m+[m[32mdef listar_cidades():[m
+[32m+[m[32m    cidades_lista = cidades.listar_cidades()[m
+[32m+[m[32m    return render_template('cidades.html', cidades=cidades_lista)[m
+[32m+[m
+[32m+[m[32m@app.route('/cidades/adicionar', methods=['GET', 'POST'])[m
+[32m+[m[32mdef adicionar_cidade():[m
+[32m+[m[32m    if request.method == 'POST':[m
+[32m+[m[32m        codigo = int(request.form['codigo'])[m
+[32m+[m[32m        descricao = request.form['descricao'][m
+[32m+[m[32m        estado = request.form['estado'][m
+[32m+[m[41m        [m
+[32m+[m[32m        if cidades.adicionar_cidade(codigo, descricao, estado):[m
+[32m+[m[32m            flash('Cidade adicionada com sucesso!', 'success')[m
+[32m+[m[32m        else:[m
+[32m+[m[32m            flash('Erro ao adicionar cidade. Código já existe!', 'error')[m
+[32m+[m[32m        return redirect(url_for('listar_cidades'))[m
+[32m+[m[41m    [m
+[32m+[m[32m    return render_template('adicionar_cidade.html')[m
+[32m+[m
+[32m+[m[32m# ===== ROTAS PARA ESPECIALIDADES =====[m
+[32m+[m[32m@app.route('/especialidades')[m
+[32m+[m[32mdef listar_especialidades():[m
+[32m+[m[32m    especialidades_lista = especialidades.listar_especialidades()[m
+[32m+[m[32m    return render_template('especialidades.html', especialidades=especialidades_lista)[m
+[32m+[m
+[32m+[m[32m@app.route('/especialidades/adicionar', methods=['GET', 'POST'])[m
+[32m+[m[32mdef adicionar_especialidade():[m
+[32m+[m[32m    if request.method == 'POST':[m
+[32m+[m[32m        codigo = int(request.form['codigo'])[m
+[32m+[m[32m        descricao = request.form['descricao'][m
+[32m+[m[32m        valor_consulta = float(request.form['valor_consulta'])[m
+[32m+[m[32m        limite_diario = int(request.form['limite_diario'])[m
+[32m+[m[41m        [m
+[32m+[m[32m        if especialidades.adicionar_especialidade(codigo, descricao, valor_consulta, limite_diario):[m
+[32m+[m[32m            flash('Especialidade adicionada com sucesso!', 'success')[m
+[32m+[m[32m        else:[m
+[32m+[m[32m            flash('Erro ao adicionar especialidade. Código já existe!', 'error')[m
+[32m+[m[32m        return redirect(url_for('listar_especialidades'))[m
+[32m+[m[41m    [m
+[32m+[m[32m    return render_template('adicionar_especialidade.html')[m
+[32m+[m
+[32m+[m[32m# ===== ROTAS PARA MÉDICOS =====[m
+[32m+[m[32m@app.route('/medicos')[m
+[32m+[m[32mdef listar_medicos():[m
+[32m+[m[32m    medicos_lista = medicos.listar_medicos()[m
+[32m+[m[32m    return render_template('medicos.html', medicos=medicos_lista)[m
+[32m+[m
+[32m+[m[32m@app.route('/medicos/adicionar', methods=['GET', 'POST'])[m
+[32m+[m[32mdef adicionar_medico():[m
+[32m+[m[32m    if request.method == 'POST':[m
+[32m+[m[32m        codigo = int(request.form['codigo'])[m
+[32m+[m[32m        nome = request.form['nome'][m
+[32m+[m[32m        endereco = request.form['endereco'][m
+[32m+[m[32m        telefone = request.form['telefone'][m
+[32m+[m[32m        codigo_cidade = int(request.form['codigo_cidade'])[m
+[32m+[m[32m        codigo_especialidade = int(request.form['codigo_especialidade'])[m
+[32m+[m[41m        [m
+[32m+[m[32m        if medicos.adicionar_medico(codigo, nome, endereco, telefone, codigo_cidade, codigo_especialidade):[m
+[32m+[m[32m            flash('Médico adicionado com sucesso!', 'success')[m
+[32m+[m[32m        else:[m
+[32m+[m[32m            flash('Erro ao adicionar médico. Código já existe!', 'error')[m
+[32m+[m[32m        return redirect(url_for('listar_medicos'))[m
+[32m+[m[41m    [m
+[32m+[m[32m    cidades_lista = cidades.listar_cidades()[m
+[32m+[m[32m    especialidades_lista = especialidades.listar_especialidades()[m
+[32m+[m[32m    return render_template('adicionar_medico.html', cidades=cidades_lista, especialidades=especialidades_lista)[m
+[32m+[m
+[32m+[m[32m# ===== ROTAS PARA PACIENTES =====[m
+[32m+[m[32m@app.route('/pacientes')[m
+[32m+[m[32mdef listar_pacientes():[m
+[32m+[m[32m    pacientes_lista = pacientes.listar_pacientes()[m
+[32m+[m[32m    return render_template('pacientes.html', pacientes=pacientes_lista)[m
+[32m+[m
+[32m+[m[32m@app.route('/pacientes/adicionar', methods=['GET', 'POST'])[m
+[32m+[m[32mdef adicionar_paciente():[m
+[32m+[m[32m    if request.method == 'POST':[m
+[32m+[m[32m        codigo = int(request.form['codigo'])[m
+[32m+[m[32m        nome = request.form['nome'][m
+[32m+[m[32m        data_nascimento = request.form['data_nascimento'][m
+[32m+[m[32m        endereco = request.form['endereco'][m
+[32m+[m[32m        telefone = request.form['telefone'][m
+[32m+[m[32m        codigo_cidade = int(request.form['codigo_cidade'])[m
+[32m+[m[32m        peso = float(request.form['peso'])[m
+[32m+[m[32m        altura = float(request.form['altura'])[m
+[32m+[m[41m        [m
+[32m+[m[32m        if pacientes.adicionar_paciente(codigo, nome, data_nascimento, endereco, telefone, codigo_cidade, peso, altura):[m
+[32m+[m[32m            flash('Paciente adicionado com sucesso!', 'success')[m
+[32m+[m[32m        else:[m
+[32m+[m[32m            flash('Erro ao adicionar paciente. Código já existe!', 'error')[m
+[32m+[m[32m        return redirect(url_for('listar_pacientes'))[m
+[32m+[m[41m    [m
+[32m+[m[32m    cidades_lista = cidades.listar_cidades()[m
+[32m+[m[32m    return render_template('adicionar_paciente.html', cidades=cidades_lista)[m
+[32m+[m
+[32m+[m[32m# ===== ROTAS PARA EXAMES =====[m
+[32m+[m[32m@app.route('/exames')[m
+[32m+[m[32mdef listar_exames():[m
+[32m+[m[32m    exames_lista = exames.listar_exames()[m
+[32m+[m[32m    return render_template('exames.html', exames=exames_lista)[m
+[32m+[m
+[32m+[m[32m@app.route('/exames/adicionar', methods=['GET', 'POST'])[m
+[32m+[m[32mdef adicionar_exame():[m
+[32m+[m[32m    if request.method == 'POST':[m
+[32m+[m[32m        codigo = int(request.form['codigo'])[m
+[32m+[m[32m        descricao = request.form['descricao'][m
+[32m+[m[32m        codigo_especialidade = int(request.form['codigo_especialidade'])[m
+[
