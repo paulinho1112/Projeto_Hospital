@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Relatório Completo - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Relatório Completo de Consultas</h2>
+    <a href="{{ url_for('relatorios') }}" class="btn btn-secondary">Voltar</a>
+</div>
+
+{% if relatorio.consultas %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Paciente</th>
+                <th>Cidade</th>
+                <th>Médico</th>
+                <th>Exame</th>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Valor Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for consulta in relatorio.consultas %}
+            <tr>
+                <td>{{ consulta.codigo }}</td>
+                <td>{{ consulta.nome_paciente }}</td>
+                <td>{{ consulta.nome_cidade_paciente }}</td>
+                <td>{{ consulta.nome_medico }}</td>
+                <td>{{ consulta.descricao_exame }}</td>
+                <td>{{ consulta.data_consulta }}</td>
+                <td>{{ consulta.hora_consulta }}</td>
+                <td>R$ {{ "%.2f"|format(consulta.valor_total) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <p><strong>Total de Pacientes:</strong> {{ relatorio.total_pacientes }}</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Valor Total:</strong> <span class="text-success"><strong>R$ {{ "%.2f"|format(relatorio.valor_total_pagar) }}</strong></span></p>
+        </div>
+    </div>
+{% else %}
+    <p>Nenhuma consulta encontrada.</p>
+{% endif %}
+{% endblock %}

@@ -11,7 +11,7 @@ def carregar_diarias():
             diarias = json.load(f)
             # Reconstruir índice
             for diaria in diarias:
-                indice.inserir(diaria["codigo"], diaria)
+                indice.inserir_dados(diaria["codigo"], diaria)
     except FileNotFoundError:
         diarias = []
 
@@ -24,7 +24,7 @@ carregar_diarias()
 
 def adicionar_diaria(codigo, codigo_especialidade, quantidade_consultas):
     # Verificar se código já existe usando índice
-    if indice.buscar(codigo) is not None:
+    if indice.buscar_codigo(codigo) is not None:
         print("Código de dia já existe!")
         return False
 
@@ -35,28 +35,28 @@ def adicionar_diaria(codigo, codigo_especialidade, quantidade_consultas):
     }
 
     diarias.append(nova_diaria)
-    indice.inserir(codigo, nova_diaria)  # Adicionar ao índice
+    indice.inserir_dados(codigo, nova_diaria)  # Adicionar ao índice
     salvar_diarias()  # Salvar após adicionar
     return True
 
 
 def buscar_diaria_por_codigo(codigo):
     """Busca usando índice (mais rápido)"""
-    return indice.buscar(codigo)
+    return indice.buscar_codigo(codigo)
 
 def listar_diarias():
     """Lista usando índice (em ordem de código)"""
-    return indice.listar_todos()
+    return indice.listar_todos_dados_cres()
 
 
 def atualizar_diaria(codigo, codigo_especialidade, quantidade_consultas):
     # Buscar usando índice
-    diaria = indice.buscar(codigo)
+    diaria = indice.buscar_codigo(codigo)
     if diaria is not None:
         diaria["codigo_especialidade"] = codigo_especialidade
         diaria["quantidade_consultas"] = quantidade_consultas
         # Atualizar no índice também
-        indice.inserir(codigo, diaria)
+        indice.inserir_dados(codigo, diaria)
         salvar_diarias()  # Salvar após atualizar
         return True
     return False
@@ -67,7 +67,7 @@ def remover_diaria(codigo):
     for i, diaria in enumerate(diarias):
         if diaria["codigo"] == codigo:
             del diarias[i]
-            indice.remover(codigo)  # Remover do índice
+            indice.remover_no(codigo)  # Remover do índice
             salvar_diarias()  # Salvar após remover
             return True
     return False
@@ -84,16 +84,16 @@ def buscar_diarias_por_campo(campo, valor):
 # Funções extras usando o índice
 def listar_diarias_ordenadas():
     """Lista diárias em ordem de código (usando índice)"""
-    return indice.listar_todos()
+    return indice.listar_todos_dados_cres()
 
 def buscar_diaria_por_posicao(posicao):
     """Busca diária por posição na lista ordenada"""
-    return indice.buscar_por_posicao(posicao)
+    return indice.buscar_por_posicao_lista(posicao)
 
 def contar_diarias():
     """Conta quantas diárias existem"""
-    return indice.contar()
+    return indice.contar_registro()
 
 def listar_codigos_diarias():
     """Lista apenas os códigos das diárias em ordem"""
-    return indice.listar_codigos()
+    return indice.listar_codigos_cres()

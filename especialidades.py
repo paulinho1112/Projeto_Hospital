@@ -11,7 +11,7 @@ def carregar_especialidades():
             especialidades = json.load(f)
             # Reconstruir índice
             for especialidade in especialidades:
-                indice.inserir(especialidade["codigo"], especialidade)
+                indice.inserir_dados(especialidade["codigo"], especialidade)
     except FileNotFoundError:
         especialidades = []
 
@@ -24,7 +24,7 @@ carregar_especialidades()
 
 def adicionar_especialidade(codigo, descricao, valor_consulta, limite_diario):
     # Verificar se código já existe usando índice
-    if indice.buscar(codigo) is not None:
+    if indice.buscar_codigo(codigo) is not None:
         print("código de especialidade já existe!")
         return False
     
@@ -35,27 +35,28 @@ def adicionar_especialidade(codigo, descricao, valor_consulta, limite_diario):
         "limite_diario": limite_diario 
     }
     especialidades.append(nova_especialidade)
-    indice.inserir(codigo, nova_especialidade)  # Adicionar ao índice
+    indice.inserir_dados(codigo, nova_especialidade)  # Adicionar ao índice
     salvar_especialidades()  # Salvar após adicionar
     return True
 
 def buscar_especialidade_por_codigo(codigo):
-    """Busca usando índice (mais rápido)"""
-    return indice.buscar(codigo)
+    return indice.buscar_codigo(codigo)
+
+  
 
 def listar_especialidades():
     """Lista usando índice (em ordem de código)"""
-    return indice.listar_todos()
+    return indice.listar_todos_dados_cres()
 
 
 def atualizar_especialidade(codigo, descricao, valor_consulta):
     # Buscar usando índice
-    especialidade = indice.buscar(codigo)
+    especialidade = indice.buscar_codigo(codigo)
     if especialidade is not None:
         especialidade["descricao"] = descricao
         especialidade["valor_consulta"] = valor_consulta
         # Atualizar no índice também
-        indice.inserir(codigo, especialidade)
+        indice.inserir_dados(codigo, especialidade)
         salvar_especialidades()  # Salvar após atualizar
         return True
     return False
@@ -66,7 +67,7 @@ def remover_especialidade(codigo):
     for i, especialidade in enumerate(especialidades):
         if especialidade["codigo"] == codigo:
             del especialidades[i]
-            indice.remover(codigo)  # Remover do índice
+            indice.remover_no(codigo)  # Remover do índice
             salvar_especialidades()  # Salvar após remover
             return True
     return False
@@ -83,16 +84,22 @@ def buscar_especialidade_por_campo(campo, valor):
 # Funções extras usando o índice
 def listar_especialidades_ordenadas():
     """Lista especialidades em ordem de código (usando índice)"""
-    return indice.listar_todos()
+    return indice.listar_todos_dados_cres()
 
 def buscar_especialidade_por_posicao(posicao):
     """Busca especialidade por posição na lista ordenada"""
-    return indice.buscar_por_posicao(posicao)
+    return indice.buscar_por_posicao_lista(posicao)
 
 def contar_especialidades():
     """Conta quantas especialidades existem"""
-    return indice.contar()
+    return indice.contar_registro()
 
 def listar_codigos_especialidades():
     """Lista apenas os códigos das especialidades em ordem"""
-    return indice.listar_codigos()
+    return indice.listar_codigos_cres()
+
+
+
+
+
+    

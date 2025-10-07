@@ -1,0 +1,41 @@
+[
+  {
+    "codigo": 3,
+    "nome": "Dr. Pedro Costa",
+    "endereco": "Rua C, 789",
+    "telefone": "3333-3333",
+    "codigo_cidade": 3,
+    "codigo_especialidade": 3,
+    "nome_cidade": "Belo Horizonte",
+    "estado": "MG",
+    "descricao_especialidade": "Ortopedia",
+    "valor_consulta": 180.0,
+    "limite_diario": 6
+  },
+  {
+    "codigo": 4,
+    "nome": "Dra. Ana Lima",
+    "endereco": "Rua D, 101",
+    "telefone": "4444-4444",
+    "codigo_cidade": 4,
+    "codigo_especialidade": 4,
+    "nome_cidade": "Salvador",
+    "estado": "BA",
+    "descricao_especialidade": "Dermatologia",
+    "valor_consulta": 130.0,
+    "limite_diario": 7
+  },
+  {
+    "codigo": 12,
+    "nome": "paulo",
+    "endereco": "ra",
+    "telefone": "123123123",
+    "codigo_cidade": 1,
+    "codigo_especialidade": 1,
+    "nome_cidade": "Cidade não encontrada",
+    "estado": "N/A",
+    "descricao_especialidade": "Cardiologia",
+    "valor_consulta": 150.0,
+    "limite_diario": 5
+  }
+]

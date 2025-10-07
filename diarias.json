@@ -1,0 +1,17 @@
+[
+  {
+    "codigo": "2024-01-15",
+    "codigo_especialidade": 2,
+    "quantidade_consultas": 2
+  },
+  {
+    "codigo": "2024-01-16",
+    "codigo_especialidade": 4,
+    "quantidade_consultas": 2
+  },
+  {
+    "codigo": "2024-01-17",
+    "codigo_especialidade": 1,
+    "quantidade_consultas": 1
+  }
+]

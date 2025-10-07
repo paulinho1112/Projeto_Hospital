@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Adicionar Cidade - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<h2>Adicionar Cidade</h2>
+
+<form method="POST" class="mt-4">
+    <div class="mb-3">
+        <label for="codigo" class="form-label">Código</label>
+        <input type="number" class="form-control" id="codigo" name="codigo" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="descricao" class="form-label">Descrição</label>
+        <input type="text" class="form-control" id="descricao" name="descricao" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="estado" class="form-label">Estado</label>
+        <input type="text" class="form-control" id="estado" name="estado" maxlength="2" required>
+    </div>
+    
+    <div class="mb-3">
+        <a href="{{ url_for('listar_cidades') }}" class="btn btn-secondary">Voltar</a>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </div>
+</form>
+{% endblock %}

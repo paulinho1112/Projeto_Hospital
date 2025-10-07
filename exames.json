@@ -1,0 +1,26 @@
+[
+  {
+    "codigo": 1,
+    "descricao": "Eletrocardiograma",
+    "codigo_especialidade": 1,
+    "valor_exame": 80.0
+  },
+  {
+    "codigo": 2,
+    "descricao": "Raio-X Tórax",
+    "codigo_especialidade": 2,
+    "valor_exame": 60.0
+  },
+  {
+    "codigo": 3,
+    "descricao": "Ressonância Magnética",
+    "codigo_especialidade": 3,
+    "valor_exame": 200.0
+  },
+  {
+    "codigo": 4,
+    "descricao": "Biópsia de Pele",
+    "codigo_especialidade": 4,
+    "valor_exame": 120.0
+  }
+]

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Consultas - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-calendar-check"></i> Consultas</h2>
+    <a href="{{ url_for('adicionar_consulta') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Adicionar Consulta
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Lista de Consultas</h5>
+    </div>
+    <div class="card-body">
+        {% if consultas %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Paciente</th>
+                            <th>Cidade</th>
+                            <th>Médico</th>
+                            <th>Exame</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                            <th>Valor Total</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for consulta in consultas %}
+                        <tr>
+                            <td>{{ consulta.codigo }}</td>
+                            <td>{{ consulta.nome_paciente }}</td>
+                            <td>{{ consulta.nome_cidade_paciente }}</td>
+                            <td>{{ consulta.nome_medico }}</td>
+                            <td>{{ consulta.descricao_exame }}</td>
+                            <td>{{ consulta.data_consulta }}</td>
+                            <td>{{ consulta.hora_consulta }}</td>
+                            <td class="text-success fw-bold">R$ {{ "%.2f"|format(consulta.valor_total) }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('excluir_consulta', codigo=consulta.codigo) }}" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir esta consulta?')">
+                                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-calendar-check fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Nenhuma consulta cadastrada</h5>
+                <p class="text-muted">Clique no botão "Adicionar Consulta" para começar.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
