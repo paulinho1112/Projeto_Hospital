@@ -1,5 +1,10 @@
 [
   {
+    "codigo": 1,
+    "descricao": "São Paulo",
+    "estado": "SP"
+  },
+  {
     "codigo": 2,
     "descricao": "Rio de Janeiro",
     "estado": "RJ"

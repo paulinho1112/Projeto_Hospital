@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}Relatórios - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<h2>Relatórios de Faturamento</h2>
+
+<div class="row mt-4">
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento por Dia</h5>
+                <a href="{{ url_for('faturamento_dia') }}" class="btn btn-primary">Gerar Relatório</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento por Período</h5>
+                <a href="{{ url_for('faturamento_periodo') }}" class="btn btn-primary">Gerar Relatório</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento por Médico</h5>
+                <a href="{{ url_for('faturamento_medico') }}" class="btn btn-primary">Gerar Relatório</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Faturamento por Especialidade</h5>
+                <a href="{{ url_for('faturamento_especialidade') }}" class="btn btn-primary">Gerar Relatório</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Relatório Completo</h5>
+                <a href="{{ url_for('relatorio_completo') }}" class="btn btn-primary">Ver Relatório Completo</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Adicionar Consulta - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-plus"></i> Adicionar Nova Consulta
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="codigo" class="form-label">Código da Consulta</label>
+                                <input type="number" class="form-control" id="codigo" name="codigo" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="data_consulta" class="form-label">Data da Consulta</label>
+                                <input type="date" class="form-control" id="data_consulta" name="data_consulta" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="hora_consulta" class="form-label">Hora da Consulta</label>
+                                <input type="time" class="form-control" id="hora_consulta" name="hora_consulta" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="codigo_paciente" class="form-label">Paciente</label>
+                                <select class="form-select" id="codigo_paciente" name="codigo_paciente" required>
+                                    <option value="">Selecione um paciente</option>
+                                    {% for paciente in pacientes %}
+                                    <option value="{{ paciente.codigo }}">{{ paciente.nome }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="codigo_medico" class="form-label">Médico</label>
+                                <select class="form-select" id="codigo_medico" name="codigo_medico" required>
+                                    <option value="">Selecione um médico</option>
+                                    {% for medico in medicos %}
+                                    <option value="{{ medico.codigo }}">{{ medico.nome }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="codigo_exame" class="form-label">Exame</label>
+                                <select class="form-select" id="codigo_exame" name="codigo_exame" required>
+                                    <option value="">Selecione um exame</option>
+                                    {% for exame in exames %}
+                                    <option value="{{ exame.codigo }}">{{ exame.descricao }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{{ url_for('listar_consultas') }}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Salvar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Faturamento por Período - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<h2>Faturamento por Período</h2>
+
+{% if faturamento %}
+    <div class="mt-4">
+        <h4>Período: {{ faturamento.data_inicial }} a {{ faturamento.data_final }}</h4>
+        <p><strong>Total:</strong> R$ {{ "%.2f"|format(faturamento.total) }}</p>
+        <p><strong>Consultas:</strong> {{ faturamento.consultas|length }}</p>
+    </div>
+{% else %}
+    <p class="mt-4">Nenhum faturamento encontrado para este período.</p>
+{% endif %}
+
+<div class="mt-4">
+    <a href="{{ url_for('faturamento_periodo') }}" class="btn btn-primary">Nova Consulta</a>
+    <a href="{{ url_for('relatorios') }}" class="btn btn-secondary">Voltar</a>
+</div>
+{% endblock %}

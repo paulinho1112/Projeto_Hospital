@@ -1,0 +1,18 @@
+[
+  {
+    "codigo": 1,
+    "nome": "Dr. João Silva Atualizado",
+    "endereco": "Rua A, 123",
+    "telefone": "9999-9999",
+    "codigo_cidade": 1,
+    "codigo_especialidade": 1
+  },
+  {
+    "codigo": 2,
+    "nome": "Dra. Maria Santos",
+    "endereco": "Rua B, 456",
+    "telefone": "2222-2222",
+    "codigo_cidade": 2,
+    "codigo_especialidade": 2
+  }
+]

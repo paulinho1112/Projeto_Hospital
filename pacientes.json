@@ -1,0 +1,42 @@
+[
+  {
+    "codigo": 1,
+    "nome": "Ana Silva",
+    "data_nascimento": "1990-01-01",
+    "endereco": "Rua E, 202",
+    "telefone": "5555-5555",
+    "codigo_cidade": 1,
+    "peso": 70.5,
+    "altura": 1.75
+  },
+  {
+    "codigo": 2,
+    "nome": "Carlos Santos",
+    "data_nascimento": "1985-05-15",
+    "endereco": "Rua F, 303",
+    "telefone": "6666-6666",
+    "codigo_cidade": 2,
+    "peso": 65.0,
+    "altura": 1.65
+  },
+  {
+    "codigo": 3,
+    "nome": "Lucia Costa",
+    "data_nascimento": "1992-08-20",
+    "endereco": "Rua G, 404",
+    "telefone": "7777-7777",
+    "codigo_cidade": 3,
+    "peso": 58.0,
+    "altura": 1.6
+  },
+  {
+    "codigo": 4,
+    "nome": "Roberto Lima",
+    "data_nascimento": "1988-12-10",
+    "endereco": "Rua H, 505",
+    "telefone": "8888-8888",
+    "codigo_cidade": 4,
+    "peso": 80.0,
+    "altura": 1.8
+  }
+]

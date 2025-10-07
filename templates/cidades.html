@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Cidades - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Cidades</h2>
+    <a href="{{ url_for('adicionar_cidade') }}" class="btn btn-primary">Adicionar Cidade</a>
+</div>
+
+{% if cidades %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descrição</th>
+                <th>Estado</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cidade in cidades %}
+            <tr>
+                <td>{{ cidade.codigo }}</td>
+                <td>{{ cidade.descricao }}</td>
+                <td>{{ cidade.estado }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('excluir_cidade', codigo=cidade.codigo) }}" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir esta cidade?')">
+                        <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nenhuma cidade cadastrada.</p>
+{% endif %}
+{% endblock %}

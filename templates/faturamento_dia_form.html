@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Faturamento por Dia - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<h2>Faturamento por Dia</h2>
+
+<form method="POST" class="mt-4">
+    <div class="mb-3">
+        <label for="data" class="form-label">Data</label>
+        <input type="date" class="form-control" id="data" name="data" required>
+    </div>
+    
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+        <a href="{{ url_for('relatorios') }}" class="btn btn-secondary">Voltar</a>
+    </div>
+</form>
+{% endblock %}

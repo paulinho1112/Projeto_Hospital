@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Exames - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-x-ray"></i> Exames</h2>
+    <a href="{{ url_for('adicionar_exame') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Adicionar Exame
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">Lista de Exames</h5>
+    </div>
+    <div class="card-body">
+        {% if exames %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Descrição</th>
+                            <th>Especialidade</th>
+                            <th>Valor</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for exame in exames %}
+                        <tr>
+                            <td>{{ exame.codigo }}</td>
+                            <td>{{ exame.descricao }}</td>
+                            <td>{{ exame.nome_especialidade }}</td>
+                            <td class="text-success fw-bold">R$ {{ "%.2f"|format(exame.valor_exame) }}</td>
+                            <td>
+                                <form method="POST" action="{{ url_for('excluir_exame', codigo=exame.codigo) }}" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja excluir este exame?')">
+                                    <button type="submit" class="btn btn-danger btn-sm">Excluir</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="text-center py-4">
+                <i class="fas fa-x-ray fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">Nenhum exame cadastrado</h5>
+                <p class="text-muted">Clique no botão "Adicionar Exame" para começar.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

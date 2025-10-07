@@ -1,22 +1,12 @@
 [
   {
+    "codigo": 2,
+    "descricao": "Rio de Janeiro",
+    "estado": "RJ"
+  },
+  {
     "codigo": 3,
     "descricao": "Belo Horizonte",
     "estado": "MG"
-  },
-  {
-    "codigo": 1,
-    "descricao": "São Paulo",
-    "estado": "SP"
-  },
-  {
-    "codigo": 5,
-    "descricao": "Salvador",
-    "estado": "BA"
-  },
-  {
-    "codigo": 4,
-    "descricao": "Brasília",
-    "estado": "DF"
   }
 ]

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Início - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<h1>Sistema Hospitalar</h1>
+<p>Sistema de gestão hospitalar com estrutura de árvore binária.</p>
+
+<div class="row mt-4">
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Cidades</h5>
+                <a href="{{ url_for('listar_cidades') }}" class="btn btn-primary">Ver Cidades</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Especialidades</h5>
+                <a href="{{ url_for('listar_especialidades') }}" class="btn btn-primary">Ver Especialidades</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Médicos</h5>
+                <a href="{{ url_for('listar_medicos') }}" class="btn btn-primary">Ver Médicos</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Pacientes</h5>
+                <a href="{{ url_for('listar_pacientes') }}" class="btn btn-primary">Ver Pacientes</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Exames</h5>
+                <a href="{{ url_for('listar_exames') }}" class="btn btn-primary">Ver Exames</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Consultas</h5>
+                <a href="{{ url_for('listar_consultas') }}" class="btn btn-primary">Ver Consultas</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Relatórios</h5>
+                <a href="{{ url_for('relatorios') }}" class="btn btn-primary">Ver Relatórios</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

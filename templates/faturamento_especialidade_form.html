@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Faturamento por Especialidade - Sistema Hospitalar{% endblock %}
+
+{% block content %}
+<h2>Faturamento por Especialidade</h2>
+
+<form method="POST" class="mt-4">
+    <div class="mb-3">
+        <label for="codigo_especialidade" class="form-label">Especialidade</label>
+        <select class="form-control" id="codigo_especialidade" name="codigo_especialidade" required>
+            <option value="">Selecione uma especialidade</option>
+            {% for especialidade in especialidades %}
+            <option value="{{ especialidade.codigo }}">{{ especialidade.codigo }} - {{ especialidade.descricao }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+        <a href="{{ url_for('relatorios') }}" class="btn btn-secondary">Voltar</a>
+    </div>
+</form>
+{% endblock %}

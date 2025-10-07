@@ -1,0 +1,22 @@
+[
+  {
+    "codigo": 1,
+    "nome": "João Silva",
+    "data_nascimento": "1990-01-01",
+    "endereco": "Rua A, 123",
+    "telefone": "1111-1111",
+    "codigo_cidade": 1,
+    "peso": 70.5,
+    "altura": 1.75
+  },
+  {
+    "codigo": 2,
+    "nome": "Maria Santos",
+    "data_nascimento": "1985-05-15",
+    "endereco": "Rua B, 456",
+    "telefone": "2222-2222",
+    "codigo_cidade": 2,
+    "peso": 65.0,
+    "altura": 1.65
+  }
+]
